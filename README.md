@@ -1,2 +1,2 @@
-# Designing-and-Implementing-a-Microsoft-Azure-AI-Solution-AI-102-Certification
-GitHub repository for the Designing and Implementing a Microsoft Azure AI Solution: AI-102 Certification book
+# Azure AI-102 Essentials to Learn, Implement, and Certify
+GitHub repository for Azure AI-102 Essentials to Learn, Implement, and Certify book

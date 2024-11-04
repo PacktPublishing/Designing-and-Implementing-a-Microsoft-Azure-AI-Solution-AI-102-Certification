@@ -1,0 +1,1 @@
+All exercises are completed through the portal; no coding is required for this chapter."

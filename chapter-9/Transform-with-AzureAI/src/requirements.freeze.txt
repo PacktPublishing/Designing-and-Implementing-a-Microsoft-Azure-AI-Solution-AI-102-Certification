@@ -222,7 +222,7 @@ fastapi==0.111.0
 azure-graphrbac==0.61.1
 opencensus-ext-azure==1.1.13
 azureml-dataprep==5.1.6
-langchain==0.1.16
+langchain==0.3.7
 azureml-mlflow==1.56.0
 promptflow-core==1.11.0
 azureml-core==1.56.0

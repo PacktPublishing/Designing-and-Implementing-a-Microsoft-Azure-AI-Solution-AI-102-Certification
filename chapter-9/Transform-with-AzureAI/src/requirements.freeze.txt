@@ -87,7 +87,7 @@ antlr4-python3-runtime==4.9.3
 python-multipart==0.0.9
 pkginfo==1.11.1
 attrs==23.2.0
-waitress==2.1.2
+waitress==3.0.1
 python-dotenv==1.0.1
 more-itertools==10.3.0
 portalocker==2.8.2

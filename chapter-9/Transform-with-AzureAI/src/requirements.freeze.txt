@@ -170,7 +170,7 @@ tiktoken==0.5.2
 google_search_results==2.4.1
 tika==2.6.0
 dataclasses-json==0.6.7
-Flask-Cors==4.0.1
+Flask-Cors==4.0.2
 msal==1.28.1
 adal==1.2.7
 pyOpenSSL==24.1.0

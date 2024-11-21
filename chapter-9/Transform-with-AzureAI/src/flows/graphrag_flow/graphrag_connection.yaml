@@ -1,0 +1,9 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/CustomConnection.schema.json
+name: "graphrag"
+type: custom
+configs:
+  endpoint: "https://[apim-gateway].azure-api.net"
+secrets:
+  # Don't replace the '<user-input>' placeholder. The application will prompt you to enter a value when it runs.
+  api_key: "<user-input>"
+

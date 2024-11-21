@@ -1,0 +1,26 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_history: true
+    default: []
+  question:
+    type: string
+    is_chat_input: true
+outputs:
+  answer:
+    type: string
+    reference: ${graph_global_search.output}
+    is_chat_output: true
+nodes:
+- name: graph_global_search
+  type: python
+  source:
+    type: code
+    path: graph_global_search.py
+  inputs:
+    graph_conn: graphrag
+    index_name: [index_name]
+    query: ${inputs.question}

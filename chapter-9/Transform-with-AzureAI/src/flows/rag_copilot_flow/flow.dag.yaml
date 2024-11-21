@@ -1,0 +1,137 @@
+id: template_chat_flow
+name: Template Chat Flow
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_input: false
+    is_chat_history: true
+    default: []
+  query:
+    type: string
+    is_chat_input: true
+outputs:
+  reply:
+    type: string
+    reference: ${FormatReply.output}
+    is_chat_output: false
+  search_intents:
+    type: string
+    reference: ${ExtractIntent.output.search_intents}
+    is_chat_output: false
+  fetched_docs:
+    type: string
+    reference: ${RetrieveDocuments.output}
+    is_chat_output: false
+  current_query_intent:
+    type: string
+    reference: ${ExtractIntent.output.current_message_intent}
+    is_chat_output: false
+  concat_out:
+    type: string
+    reference: ${output_prompt.output}
+    is_chat_output: true
+nodes:
+- name: DetermineIntent
+  type: llm
+  source:
+    type: code
+    path: DetermineIntent.jinja2
+  inputs:
+    deployment_name: gpt-35-turbo
+    temperature: 0
+    top_p: 1
+    max_tokens: 800
+    presence_penalty: 0
+    frequency_penalty: 0
+    chat_history: ${inputs.chat_history}
+    query: ${inputs.query}
+  provider: AzureOpenAI
+  connection: Default_AzureOpenAI
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: ExtractIntent
+  type: python
+  source:
+    type: code
+    path: ExtractIntent.py
+  inputs:
+    input: ${DetermineIntent.output}
+    query: ${inputs.query}
+  use_variants: false
+- name: RetrieveDocuments
+  type: python
+  source:
+    type: code
+    path: RetrieveDocuments.py
+  inputs:
+    searchConnection: Default_AzureSearch
+    embeddingModelConnection: Default_AzureOpenAI
+    vectorFields: [vector_field_name]
+    embeddingModelName: text-embedding-ada-002
+    indexName: [index_name]
+    queries: ${ExtractIntent.output.search_intents}
+    queryType: vectorSimpleHybrid
+    semanticConfiguration: None
+    topK: 3
+    content_field_name: [content_field_name]
+    citation_field_name: [citation_field_name]
+  use_variants: false
+- name: FormatRetrievedDocuments
+  type: python
+  source:
+    type: code
+    path: FormatRetrievedDocuments.py
+  inputs:
+    docs: ${RetrieveDocuments.output}
+    maxTokens: 3500
+    title_field_name: title
+    content_field_name: content
+  use_variants: false
+- name: FormatConversation
+  type: python
+  source:
+    type: code
+    path: FormatConversation.py
+  inputs:
+    history: ${inputs.chat_history}
+    maxTokens: 800
+    query: ${inputs.query}
+  use_variants: false
+- name: DetermineReply
+  type: llm
+  source:
+    type: code
+    path: DetermineReply.jinja2
+  inputs:
+    deployment_name: gpt-4o
+    temperature: 0
+    top_p: 1
+    max_tokens: 800
+    presence_penalty: 0
+    frequency_penalty: 0
+    conversation: ${FormatConversation.output}
+    documentation: ${FormatRetrievedDocuments.output}
+    user_query: ${ExtractIntent.output.current_message_intent}
+  connection: Default_AzureOpenAI
+  api: chat
+  use_variants: false
+- name: FormatReply
+  type: python
+  source:
+    type: code
+    path: FormatReply.py
+  inputs:
+    reply: ${DetermineReply.output}
+  use_variants: false
+- name: output_prompt
+  type: prompt
+  source:
+    type: code
+    path: output_prompt.jinja2
+  inputs:
+    reply: ${FormatReply.output}
+    retrieveddocs: ${RetrieveDocuments.output}
+  use_variants: false

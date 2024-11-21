@@ -1,0 +1,35 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_history: true
+    default: []
+  topic:
+    type: string
+    is_chat_input: true
+    default: dmv
+outputs:
+  answer:
+    type: string
+    reference: ${generate_qna.output}
+    is_chat_output: true
+nodes:
+- name: generate_qna
+  type: python
+  source:
+    type: code
+    path: generate_qna.py
+  inputs:
+    aoai_conn: Default_AzureOpenAI
+    aoai_deployment: gpt-4o
+    aisearch_conn: Default_AzureSearch
+    aisearch_index: [index_name]
+    numquestionstotal: 20
+    numquestionspersource: 2
+    outputfile: test_qna_eval.jsonl
+    citationfieldname: [citation_field_name]
+    topic: ${inputs.topic}
+    aoai_model: gpt-4
+    content_field_name: [content_field_name]

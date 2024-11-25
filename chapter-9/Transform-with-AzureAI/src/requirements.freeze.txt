@@ -214,7 +214,7 @@ opencensus-ext-logging==0.1.1
 langchain-community==0.0.33
 langchain-text-splitters==0.0.2
 mlflow-skinny==2.13.2
-mlflow==2.13.2
+mlflow==2.16.0
 azure-monitor-opentelemetry-exporter==1.0.0b26
 opentelemetry-exporter-otlp-proto-http==1.25.0
 promptflow-tracing==1.11.0

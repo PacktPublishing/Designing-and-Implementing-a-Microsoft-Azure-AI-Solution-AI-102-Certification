@@ -84,7 +84,7 @@ mdurl==0.1.2
 kiwisolver==1.4.5
 pathspec==0.12.1
 antlr4-python3-runtime==4.9.3
-python-multipart==0.0.9
+python-multipart==0.0.18
 pkginfo==1.11.1
 attrs==23.2.0
 waitress==2.1.2

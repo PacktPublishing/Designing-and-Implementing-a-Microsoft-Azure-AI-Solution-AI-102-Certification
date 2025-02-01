@@ -104,6 +104,7 @@ All embedded URL links throughout the book will be provided in the corresponding
 * Text to speech documentation at https://learn.microsoft.com/en-us/azure/ai-services/speech-service/index-text-to-speech
 
 ## Chapter 7. Implementing Knowledge Mining and Document Intelligence 
+* The recommended approach is to use the backup and restore method. For more details, refer to https://learn.microsoft.com/en-us/samples/azure-samples/azure-search-dotnet-utilities/azure-search-backup-restore-index/
 * AI Search or use the following URL to jump straight to it: https://portal.azure.com/#create/Microsoft.Search
 * you can explore Layout model at https://aka.ms/di-layout and sample code examples at https://github.com/MicrosoftLearning/mslearn-ai-document-intelligence/tree/main
   

@@ -140,6 +140,7 @@ All embedded URL links throughout the book will be provided in the corresponding
 * Prompt engineering techniques at https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/advanced-prompt-engineering?pivots=programming-language-chat-completions
 * When to use Azure OpenAI fine-tuning at https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/fine-tuning-considerations
 * System message framework and template recommendations for LLMs at https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message
+* Azure OpenAI on Your Data at https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data?tabs=ai-search%2Ccopilot
 
 ## Chapter 9. Additional references with real-world applications
 * Chat your own data with RAG pattern at https://github.com/Azure-Samples/azure-search-openai-demo 
